@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import { Text, View, StyleSheet, Image } from 'react-native';
+import {View, StyleSheet, ScrollView } from 'react-native';
+import CourseCard from './CourseCard'
 
 export default class CoursesContainer extends Component {
 
@@ -8,21 +9,18 @@ export default class CoursesContainer extends Component {
         const showCourses = () => this.props.allCourses.map(course =>{
             return (
                 <View>
-                    <Text key={course.id}>
-                        {course.course_name}
-                    </Text>
-                    <Image style={styles.image} source={{uri: course.thumbnail}}
+                    <CourseCard 
+                        key={course.id} 
+                        course={course}
                     />
                 </View>
             )
         })
 
         return (
-            <View> 
-                <View style={styles.container}>
-                    {showCourses()}
-                </View>
-            </View>
+            <ScrollView style={styles.container}>
+                {showCourses()}
+            </ScrollView>
         );
     }
 }
@@ -30,13 +28,6 @@ export default class CoursesContainer extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 50,
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-    },
-    image: {
-        flex: 2,
-        height: 10,
-        width: 200
+        paddingTop: 30
     }
 });

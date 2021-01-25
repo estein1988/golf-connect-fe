@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { TextInput, View, Text, StyleSheet, SafeAreaView, Button } from 'react-native';
+import { TextInput, View, StyleSheet, Button } from 'react-native';
 
 export default class Login extends Component {
 
@@ -34,13 +34,14 @@ export default class Login extends Component {
                     onChangeText={this.handleChangePassword}
                     value={this.state.password}
                 />
-                <SafeAreaView style={styles.loginContainer}>
+                <View style={styles.loginContainer}>
                     <Button                         
                         onPress={this.handleSubmit} 
                         style={styles.loginButtonText}
+                        color='#ffffff'
                         title="Login">
                     </Button>
-                </SafeAreaView>
+                </View>
             </View>
         );
     }
@@ -48,7 +49,7 @@ export default class Login extends Component {
 
 const styles = StyleSheet.create({
     inputContainer: {
-        paddingTop: 300
+        paddingTop: 10
     },
     textInput: {
         borderColor: '#CCCCCC',
@@ -60,16 +61,10 @@ const styles = StyleSheet.create({
         paddingRight: 20
     },
     loginContainer: {
-        borderWidth: 1,
         borderColor: '#007BFF',
         backgroundColor: '#007BFF',
-        padding: 15,
+        padding: 1,
         margin: 5,
-    },
-    loginButtonText: {
-        color: '#FFFFFF',
-        fontSize: 20,
-        textAlign: 'center'
     }
 });
 

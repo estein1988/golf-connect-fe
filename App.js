@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
+import { SafeAreaView, StyleSheet } from 'react-native';
 
 import AsyncStorage from '@react-native-community/async-storage'
 import LoginForm from './LoginForm'
@@ -16,12 +16,6 @@ export default class App extends Component {
     user: {},
     allCourses: []
   }
-
-  // componentDidMount(){
-  //   if(AsyncStorage.getItem('token') !== null){
-  //     this.fetchModels()
-  //   }
-  // }
 
   fetchModels = () => {
     this.coursesFetch()
@@ -77,7 +71,7 @@ export default class App extends Component {
 
   render(){
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <LoginForm 
         login={this.login}
         user={this.state.user}
@@ -90,7 +84,7 @@ export default class App extends Component {
       >
       </CoursesContainer>
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 }}
 
