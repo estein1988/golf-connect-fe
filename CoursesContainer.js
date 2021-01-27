@@ -2,27 +2,24 @@ import React, {Component} from 'react';
 import {View, StyleSheet, ScrollView } from 'react-native';
 import CourseCard from './CourseCard'
 
-export default class CoursesContainer extends Component {
+export default function CoursesContainer({allCourses}) {
 
-
-    render(){
-        const showCourses = () => this.props.allCourses.map(course =>{
-            return (
-                <View>
-                    <CourseCard 
-                        key={course.id} 
-                        course={course}
-                    />
-                </View>
-            )
-        })
-
+    const showCourses = () => allCourses.map(course =>{
         return (
-            <ScrollView style={styles.container}>
-                {showCourses()}
-            </ScrollView>
-        );
-    }
+            <View>
+                <CourseCard 
+                    key={course.id} 
+                    course={course}
+                />
+            </View>
+        )
+    })
+
+    return (
+        <ScrollView style={styles.container}>
+            {showCourses()}
+        </ScrollView>
+    );
 }
 
 const styles = StyleSheet.create({

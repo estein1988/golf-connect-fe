@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet } from 'react-native';
-
 import AsyncStorage from '@react-native-community/async-storage'
 import LoginForm from './LoginForm'
 import CoursesContainer from './CoursesContainer';
@@ -10,19 +9,17 @@ const loginURL = 'http://localhost:8000/login/'
 const coursesURL = 'http://localhost:8000/courses/'
 const profileURL = 'http://localhost:8000/profile/'
 
-export default class App extends Component {
+export default function App() {
 
-  state = {
-    user: {},
-    allCourses: []
+  const [user, setUser] = useState({})
+  const [allCourses, setCourses] = useState([])
+
+  const fetchModels = () => {
+    coursesFetch()
+    profileFetch()
   }
 
-  fetchModels = () => {
-    this.coursesFetch()
-    this.profileFetch()
-  }
-
-  login = (user) => {
+  const login = (user) => {
     fetch(`${loginURL}`, {
       method: 'POST',
       headers: {
@@ -36,12 +33,12 @@ export default class App extends Component {
           console.log(data.errors)
         } else {
           AsyncStorage.setItem('token', data.access)
-          this.fetchModels()
+          fetchModels()
         }
       })
   }
 
-  profileFetch = async () => {
+  const profileFetch = async () => {
     let tokenValue =  await AsyncStorage.getItem('token')
     fetch(profileURL, {
       method: 'GET',
@@ -50,12 +47,10 @@ export default class App extends Component {
       }
     })
     .then(response => response.json())
-    .then(result => {
-      this.setState({user: result})
-    })
+    .then(result => setUser(result))
   }
 
-  coursesFetch = async () => {
+  const coursesFetch = async () => {
     let tokenValue =  await AsyncStorage.getItem('token')
     fetch(coursesURL, {
       method: 'GET',
@@ -64,29 +59,26 @@ export default class App extends Component {
       }
     })
     .then(response => response.json())
-    .then(result => {
-      this.setState({allCourses: result})
-    })
+    .then(result => setCourses(result))
   }
 
-  render(){
   return (
     <SafeAreaView style={styles.container}>
       <LoginForm 
-        login={this.login}
-        user={this.state.user}
-        allCourses={this.state.allCourses}
+        login={login}
+        user={user}
+        allCourses={allCourses}
       >
       </LoginForm>
       <CoursesContainer 
-        user={this.state.user}
-        allCourses={this.state.allCourses}
+        user={user}
+        allCourses={allCourses}
       >
       </CoursesContainer>
       <StatusBar style="auto" />
     </SafeAreaView>
   );
-}}
+}
 
 const styles = StyleSheet.create({
   container: {

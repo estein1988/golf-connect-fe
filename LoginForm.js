@@ -1,50 +1,46 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import { TextInput, View, StyleSheet, Button } from 'react-native';
 
-export default class Login extends Component {
+export default function Login({login}) {
 
-    state = {
-        username: 'admin',
-        password: '68qwerty'
-    }
+    const [username, setUsername] = useState('admin')
+    const [password, setPassword] = useState('password123')
 
-    handleSubmit = (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault()
-        this.props.login(this.state)
+        login({username, password})
     }
 
-    handleChangeUsername = (textValue)=>{
-        this.setState({username: textValue})
+    const handleChangeUsername = (textValue)=>{
+        setUsername(textValue)
     }
 
-    handleChangePassword = (textValue)=>{
-        this.setState({password: textValue})
+    const handleChangePassword = (textValue)=>{
+        setPassword(textValue)
     }
 
-    render(){
-        return (
-            <View style={styles.inputContainer}>  
-                <TextInput
-                    style={styles.textInput}
-                    onChangeText={this.handleChangeUsername}
-                    value={this.state.username}
-                />
-                <TextInput
-                    style={styles.textInput}
-                    onChangeText={this.handleChangePassword}
-                    value={this.state.password}
-                />
-                <View style={styles.loginContainer}>
-                    <Button                         
-                        onPress={this.handleSubmit} 
-                        style={styles.loginButtonText}
-                        color='#ffffff'
-                        title="Login">
-                    </Button>
-                </View>
+    return (
+        <View style={styles.inputContainer}>  
+            <TextInput
+                style={styles.textInput}
+                onChangeText={handleChangeUsername}
+                value={username}
+            />
+            <TextInput
+                style={styles.textInput}
+                onChangeText={handleChangePassword}
+                value={password}
+            />
+            <View style={styles.loginContainer}>
+                <Button                         
+                    onPress={handleSubmit} 
+                    style={styles.loginButtonText}
+                    color='#ffffff'
+                    title="Login">
+                </Button>
             </View>
-        );
-    }
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
