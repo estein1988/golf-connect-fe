@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {View, StyleSheet, ScrollView } from 'react-native';
 import CourseCard from './CourseCard'
 
-export default function CoursesContainer({allCourses}) {
+export default function CoursesContainer({allCourses, joinFoursome}) {
 
     const showCourses = () => allCourses.map(course =>{
         return (
@@ -10,6 +10,7 @@ export default function CoursesContainer({allCourses}) {
                 <CourseCard 
                     key={course.id} 
                     course={course}
+                    joinFoursome={joinFoursome}
                 />
             </View>
         )
@@ -25,6 +26,6 @@ export default function CoursesContainer({allCourses}) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 30
+        paddingTop: 10
     }
 });

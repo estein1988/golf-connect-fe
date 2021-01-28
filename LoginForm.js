@@ -33,8 +33,7 @@ export default function Login({login}) {
             />
             <View style={styles.loginContainer}>
                 <Button                         
-                    onPress={handleSubmit} 
-                    style={styles.loginButtonText}
+                    onPress={handleSubmit}
                     color='#ffffff'
                     title="Login">
                 </Button>
@@ -52,15 +51,14 @@ const styles = StyleSheet.create({
         borderTopWidth: 1,
         borderBottomWidth: 1,
         height: 50,
-        fontSize: 25,
+        fontSize: 20,
         paddingLeft: 20,
         paddingRight: 20
     },
     loginContainer: {
         borderColor: '#007BFF',
         backgroundColor: '#007BFF',
-        padding: 1,
-        margin: 5,
+        padding: 3,
+        margin: 3,
     }
 });
-
